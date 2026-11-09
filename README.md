@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Vitrine Bio — Site Institucional
 
-## Getting Started
+Landing page oficial da **Vitrine Bio**: apresentação premium e orientada à conversão para criação de sites profissionais. Totalmente estática, sem backend, com conversão via WhatsApp.
 
-First, run the development server:
+## Como executar
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # build de produção
+npm start        # serve o build
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Configuração obrigatória — WhatsApp
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+O número do WhatsApp é centralizado em `NEXT_PUBLIC_WHATSAPP_NUMBER`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Copie `.env.example` para `.env.local`
+2. Substitua `5511000000000` pelo número oficial da Vitrine Bio (DDI + DDD + número, só números, sem espaços/parênteses/traços)
+3. Substitua `NEXT_PUBLIC_SITE_URL` pela URL pública do domínio final
 
-## Learn More
+> `5511000000000` é um placeholder intencional para desenvolvimento. Não deve ser publicado.
 
-To learn more about Next.js, take a look at the following resources:
+## Estrutura
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `app/` — layout, página, SEO, sitemap e robots
+- `components/` — Header, MobileMenu, HeroSection, AboutSection, ServicesSection, BenefitsSection, ProcessSection, ContactSection, ContactForm, FinalCTA, Footer, WhatsAppButton
+- `lib/site.ts` — conteúdo e navegação centralizados
+- `lib/whatsapp.ts` — montagem da mensagem e do link wa.me com `encodeURIComponent`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Formulário
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Sem backend. Ao enviar, valida os campos, monta a mensagem organizada e abre `https://wa.me/<número>?text=...` para o visitante concluir o envio no WhatsApp. Nenhuma falsa confirmação de envio é apresentada.
